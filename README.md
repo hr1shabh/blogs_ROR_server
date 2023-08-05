@@ -1,8 +1,10 @@
 # README
 
-How to test the code using Postman:
+For testing code using Postman:
 
 * Users
+
+
 => Post -   http://127.0.0.1:3000/users    [For register]
 {
   "user": {
