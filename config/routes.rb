@@ -18,6 +18,12 @@ Rails.application.routes.draw do
 
     collection do
       get :my_posts
+      get :top_posts
+      get :more_posts_by_user
+      get :posts_by_topic
+      get :recommended_posts
+      get :most_commented_posts
+      get :posts_by_date
     end
   end
 

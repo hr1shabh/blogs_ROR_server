@@ -39,8 +39,42 @@ class PostsController < ApplicationController
       @user = current_user
       @my_posts = @user.posts.includes(:comments, :likes)
     end
-    
-  
+    def top_posts
+      @top_posts = Post
+                    .left_joins(:likes)
+                    .group(:id)
+                    .order('COUNT(likes.id) DESC')
+                    .limit(10)
+    end
+    def more_posts_by_user
+      author_id = params[:author_id]
+      @author = User.find(author_id)
+      @more_posts = Post.where(user_id: author_id).order(created_at: :desc).limit(10)
+    end
+    def posts_by_topic
+      topic = params[:topic]
+      @posts_by_topic = Post.where(topic: topic).order(created_at: :desc).limit(10)
+    end
+    def recommended_posts
+      # Retrieve posts ordered by likes count in descending order
+      @recommended_posts = Post
+                          .left_joins(:likes)
+                          .group(:id)
+                          .order('COUNT(likes.id) DESC')
+                          .limit(10)
+    end
+    def most_commented_posts
+      @most_commented_posts = Post
+                              .left_joins(:comments)
+                              .group(:id)
+                              .order('COUNT(comments.id) DESC')
+                              .limit(10)
+    end
+    def posts_by_date
+      start_date = params[:start_date]
+      end_date = params[:end_date]
+      @posts_by_date = Post.where(published_datetime: start_date..end_date).order(created_at: :desc)
+    end
     private
 
     def set_post
