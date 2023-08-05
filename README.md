@@ -95,7 +95,7 @@ For testing code using Postman:
 
 => DELETE URL: http://127.0.0.1:3000/posts/:post_id/comments/:comment_id (for deleting the comment by original user)
 
-=> GET URL: http://127.0.0.1:3000/posts/:post_id/comments (for getting all comments for a given post).
+=> GET URL: http://127.0.0.1:3000/posts/:post_id/comments/:comment_id (for getting a comment for a given post).
 
 * Follow operations (Relationships)
 
@@ -107,10 +107,7 @@ For testing code using Postman:
 
 =>DELETE URL: http://127.0.0.1:3000/users/:user_id/relationships (for unfollowing)
 
-=> GET URL: http://127.0.0.1:3000/users/:user_id/followers (view followers of the user)
 
-=>  GET URL: http://127.0.0.1:3000/users/:user_id/following (view followings of the user)
 
-=> GET URL: http://127.0.0.1:3000/users/:user_id/follower_count (view follower count)
 
-=> GET URL: http://127.0.0.1:3000/users/:user_id/following_count (view following count)
+
