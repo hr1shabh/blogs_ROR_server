@@ -3,25 +3,32 @@ class PostsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
     before_action :authorize_user!, only: [:update, :destroy]   
     def index
-      
-      @posts = Post.all
+      @posts = Post.where(status: "published").order(created_at: :desc)
       render json: @posts
-
     end
   
     def show
-      render json: @post
+      if @post.draft? && (current_user.nil? || @post.user != current_user)
+        render json: { error: "You do not have permission to view this draft post." }, status: :unauthorized
+      else
+        render json: @post
+      end
     end
   
     def create
-        @post = current_user.posts.build(post_params)
-    
-        if @post.save
-          render json: @post, status: :created
-        else
-          render json: @post.errors, status: :unprocessable_entity
-        end
+      @post = current_user.posts.build(post_params)
+      if params[:publish]
+        @post.status = "published"
+      else
+        @post.status = "draft"
       end
+  
+      if @post.save
+        render json: @post, status: :created
+      else
+        render json: @post.errors, status: :unprocessable_entity
+      end
+    end
   
     def update
       if @post.update(post_params)
@@ -33,6 +40,18 @@ class PostsController < ApplicationController
   
     def destroy
       @post.destroy
+    end
+
+    def bookmark
+      @post = Post.find(params[:id])
+      current_user.bookmarks.create(post: @post)
+      render json: @post
+    end
+  
+    def bookmarked_posts
+      @user = current_user
+      @bookmarked_posts = @user.bookmarked_posts
+      render json: @bookmarked_posts
     end
 
     def my_posts

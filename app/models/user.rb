@@ -4,6 +4,9 @@ class User < ApplicationRecord
   has_many :likes
   has_many :following_relationships, class_name: 'Relationship', foreign_key: 'follower_id'
   has_many :followed_relationships, class_name: 'Relationship', foreign_key: 'followed_id'
+  has_many :bookmarks
+  has_many :bookmarked_posts, through: :bookmarks, source: :post
+  has_many :lists
 
   has_many :following, through: :following_relationships, source: :followed
   has_many :followers, through: :followed_relationships, source: :follower

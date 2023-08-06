@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_05_032854) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_06_093344) do
+  create_table "bookmarks", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_bookmarks_on_post_id"
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "text"
     t.integer "user_id", null: false
@@ -30,6 +39,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_032854) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "list_items", force: :cascade do |t|
+    t.integer "list_id", null: false
+    t.integer "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_id"], name: "index_list_items_on_list_id"
+    t.index ["post_id"], name: "index_list_items_on_post_id"
+  end
+
+  create_table "lists", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_lists_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title", null: false
     t.string "topic", null: false
@@ -39,6 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_032854) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "draft"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -65,10 +93,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_05_032854) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookmarks", "posts"
+  add_foreign_key "bookmarks", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "list_items", "lists"
+  add_foreign_key "list_items", "posts"
+  add_foreign_key "lists", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"

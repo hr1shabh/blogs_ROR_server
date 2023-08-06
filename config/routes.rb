@@ -15,7 +15,8 @@ Rails.application.routes.draw do
       get 'users', on: :member, to: 'likes#show_users'
       get 'count', on: :member, to: 'likes#count'
     end
-
+    post :bookmark, on: :member
+    get :bookmarked_posts, on: :collection
     collection do
       get :my_posts
       get :top_posts
@@ -26,6 +27,13 @@ Rails.application.routes.draw do
       get :posts_by_date
     end
   end
+  resources :lists, except: [:new, :edit] do
+    resources :list_items, only: [:create, :destroy]
+  end
+  
+
+  post '/posts/publish', to: 'posts#create', status: 'published', as: :publish_posts # Route to publish a post
+  post '/posts/draft', to: 'posts#create', status: 'draft', as: :draft_posts # Route to create a draft
 
   root to: "posts#index"
 end
