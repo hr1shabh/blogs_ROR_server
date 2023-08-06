@@ -1,6 +1,6 @@
 # README
 
-Completed all features till level 3. Also included every feature from level 5 except Revision history (Reading time can be calculated on fronend side). Figuring out level 4 for now. 
+Completed all features till level 3. Also included every feature from level 5 except Revision history (Reading time can be calculated on frontend side). Figuring out level 4 for now. 
 (Added features: Posts (drafts and published), Lists, Bookmarks)
 
 For testing code using Postman:
