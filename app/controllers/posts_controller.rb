@@ -34,6 +34,10 @@ class PostsController < ApplicationController
   
     def update
       if @post.update(post_params)
+        if params[:publish] && @post.draft?
+          @post.update(status: 'published')
+        end
+        
         render json: @post
       else
         render json: @post.errors, status: :unprocessable_entity

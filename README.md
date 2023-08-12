@@ -118,6 +118,18 @@ Drafts posts will be visible to only original user.
   }
 }
 
+=>PUT or PATCH URL: http://127.0.0.1:3000/posts/:id (For editing the post (only authorize user can edit it), also changing it status e.g. draft -> publish)
+{
+  "post": {
+    "title": "Updated Post Title",
+    "topic": "Updated Topic",
+    "text": "Updated content of the post.",
+    "published_datetime": "2023-08-11T14:00:00"
+  },
+  "publish": true
+}
+
+
 => DELETE URL: http://127.0.0.1:3000/posts/:id (deleting the post (only authorize user can delete it))
 
 
