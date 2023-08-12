@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get 'count', on: :member, to: 'likes#count'
     end
     post :bookmark, on: :member
+    delete :delete_bookmark, on: :member
     get :bookmarked_posts, on: :collection
     collection do
       get :my_posts

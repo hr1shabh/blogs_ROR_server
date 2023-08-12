@@ -62,6 +62,18 @@ class PostsController < ApplicationController
       render json: @bookmarked_posts
     end
 
+    def delete_bookmark
+      @post = Post.find(params[:id])
+      bookmark = current_user.bookmarks.find_by(post: @post)
+      
+      if bookmark
+        bookmark.destroy
+        render json: { message: 'Bookmark deleted successfully' }
+      else
+        render json: { error: 'Bookmark not found' }, status: :not_found
+      end
+    end
+
     def my_posts
       @user = current_user
       @my_posts = @user.posts.includes(:comments, :likes)

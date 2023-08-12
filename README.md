@@ -128,7 +128,7 @@ Drafts posts will be visible to only original user.
 
 => GET URL: http://127.0.0.1:3000/posts/bookmarked_posts (user can get all the posts he bookmarked).
 
-
+=> DELETE URL: http://127.0.0.1:3000/posts/:id/delete_bookmark (user can delete bookmark by using postid).
 
 
 * Lists
