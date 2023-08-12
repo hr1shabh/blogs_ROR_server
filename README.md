@@ -1,9 +1,9 @@
 # README
 
-Completed all features of level 1, level 2 and level 3. Included every feature of level 5 except Revision history.  
+Completed all features of level 1, level 2, level 4 (Except the algorithm to disctribute) and level 5 (Except Revision History).
 
 
-FOR LEVEL 4:
+## FOR LEVEL 4:
 
 Users can choose different subscriptions using Stripe.
 
@@ -20,7 +20,7 @@ After a successful payment, the user's subscription will be automatically update
 
 CODE FOR TESTING USING POSTMAN
 
-* Users
+## Users
 
 
 => Post -   http://127.0.0.1:3000/users    [For register]
@@ -52,7 +52,7 @@ CODE FOR TESTING USING POSTMAN
 
 
 
-* Posts 
+## Posts 
 
 Drafts posts will be visible to only original user.
 
@@ -122,7 +122,7 @@ Drafts posts will be visible to only original user.
 
 
 
-* Bookmarks
+## Bookmarks
 
 => POST URL: http://127.0.0.1:3000/posts/:id/bookmark (user can bookmark a post to read it later)
 
@@ -131,7 +131,7 @@ Drafts posts will be visible to only original user.
 => DELETE URL: http://127.0.0.1:3000/posts/:id/delete_bookmark (user can delete bookmark by using postid).
 
 
-* Lists
+## Lists
 
 => POST URL: http://127.0.0.1:3000/lists   (user can create a new list)
 
@@ -165,7 +165,7 @@ Drafts posts will be visible to only original user.
 
 
 
-* Likes
+## Likes
 
 => POST URL: http://127.0.0.1:3000/posts/:post_id/likes (for liking the post by current loggedin user)
 {
@@ -181,7 +181,7 @@ Drafts posts will be visible to only original user.
 
 
 
-* Comments
+## Comments
 
 => POST URL: http://127.0.0.1:3000/posts/:post_id/comments (posting a comment by loggedin user)
 {
@@ -197,7 +197,7 @@ Drafts posts will be visible to only original user.
 => GET URL: http://127.0.0.1:3000/posts/1/comments (for getting all comments for a given post)
 
 
-* Follow operations (Relationships)
+## Follow operations (Relationships)
 
 => POST URL: http://127.0.0.1:3000/users/:user_id/relationships (for following user having given user_id by loggedin user)
 {
