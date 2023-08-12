@@ -192,9 +192,9 @@ Drafts posts will be visible to only original user.
 
 => DELETE URL: http://127.0.0.1:3000/posts/:post_id/comments/:comment_id (for deleting the comment by original user)
 
-=> GET URL: http://127.0.0.1:3000/posts/:post_id/comments/:comment_id (for getting a comment for a given post).
+=> GET URL: http://127.0.0.1:3000/posts/:post_id/comments/:comment_id (for getting a single comment for a given post).
 
-
+=> GET URL: http://127.0.0.1:3000/posts/1/comments (for getting all comments for a given post)
 
 
 * Follow operations (Relationships)

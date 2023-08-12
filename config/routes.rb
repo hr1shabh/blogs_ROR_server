@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   get 'billing', to: 'billing#show'
   resources :posts do
-    resources :comments, only: [:create, :destroy, :show]
+    resources :comments, only: [:create, :destroy, :show, :index]
     
     resource :likes, only: [:create, :destroy, :show], controller: 'likes' do
       get 'users', on: :member, to: 'likes#show_users'

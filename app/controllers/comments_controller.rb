@@ -1,8 +1,14 @@
 class CommentsController < ApplicationController
     before_action :set_post
-    before_action :authenticate_user!, except: :show
+    before_action :authenticate_user!, except: [:show, :index]
     before_action :authorize_user!, only: :destroy
   
+
+    def index
+      @comments = @post.comments
+      render json: @comments
+    end
+
     def create
       @comment = @post.comments.build(comment_params)
       @comment.user = current_user
