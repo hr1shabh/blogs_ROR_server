@@ -8,6 +8,9 @@ Rails.application.routes.draw do
 
   delete '/users/:user_id/relationships', to: 'relationships#destroy', as: :destroy_relationship
 
+  get 'checkout', to: 'checkouts#show'
+  get 'checkout/success', to: 'checkouts#success'
+  get 'billing', to: 'billing#show'
   resources :posts do
     resources :comments, only: [:create, :destroy, :show]
     

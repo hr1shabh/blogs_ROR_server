@@ -1,8 +1,8 @@
 # README
 
-Completed all features till level 3. Also included every feature from level 5 except Revision history (Reading time can be calculated on frontend side). Figuring out level 4 for now. 
+Completed all features till level 3. Also included every feature from level 5 except Revision history (Reading time can be calculated on frontend side).  
 (Added features: Posts (drafts and published), Lists, Bookmarks)
-
+For Level 4: Added the payment gateway using stripe. User can pay for subscription by going to 'http://127.0.0.1:3000/checkout'. There will be a button there that will lead to stripe page.
 For testing code using Postman:
 
 * Users
