@@ -99,7 +99,7 @@ Drafts posts will be visible to only original user.
 
 => GET URL: http://127.0.0.1:3000/posts/posts_by_topic?topic=Technology (for getting posts by topic, here I use Technology)
 
-=> http://127.0.0.1:3000/posts/posts_by_title?title=Post1 (for getting posts by ttitle)
+=> http://127.0.0.1:3000/posts/posts_by_title?title=Post1 (for getting posts by title)
 
 => GET URL: http://127.0.0.1:3000/posts/recommended_posts (for recommended posts, I used most liked ones (because it was showing to use ML for it))
 
