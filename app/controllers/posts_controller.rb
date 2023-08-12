@@ -11,6 +11,7 @@ class PostsController < ApplicationController
       if @post.draft? && (current_user.nil? || @post.user != current_user)
         render json: { error: "You do not have permission to view this draft post." }, status: :unauthorized
       else
+        @post.increment!(:view_count)
         render json: @post
       end
     end

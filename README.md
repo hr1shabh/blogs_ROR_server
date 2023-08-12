@@ -1,7 +1,7 @@
 # README
 
-Completed all features till level 3. Also included every feature from level 5 except Revision history (Reading time can be calculated on frontend side).  
-(Added features: Posts (drafts and published), Lists, Bookmarks)
+Completed all features of level 1, level2 and level 3. Included every feature of level 5 except Revision history (Reading time is calculated on frontend side by using wordcount and average reading speed).  
+
 
 FOR LEVEL 4:
 
@@ -11,12 +11,14 @@ To subscribe to the "3 posts per day" plan, users should visit 'http://localhost
  
 For the "5 posts per day" plan, the URL is 'http://localhost:3000/checkout/price_1Ne9mySBy3bc8352DkV604DG', 
  
-and for the "10 posts per day" plan, users should go to 'http://localhost:3000/checkout/price_1NeAQ0SBy3bc8352mYYmwOnH'.
+For the "10 posts per day" plan, users should go to 'http://localhost:3000/checkout/price_1NeAQ0SBy3bc8352mYYmwOnH'.
 
 Once on the respective URL, users will see a checkout button (I have used views/checkouts/show.html.erb here, for simplicity. The Proper page can be implemented on frontend side). Upon clicking this button, they will be redirected to the Stripe-hosted checkout page, where they can complete the payment process.
 
 After a successful payment, the user's subscription will be automatically updated to the subscribed plan they chose.
 
+
+CODE FOR TESTING USING POSTMAN
 
 * Users
 
@@ -50,7 +52,10 @@ After a successful payment, the user's subscription will be automatically update
 
 * Posts 
 
-=> POST URL: http://127.0.0.1:3000/posts (for making a post)
+Drafts posts will be visible to only original user.
+
+
+=> POST URL: http://127.0.0.1:3000/posts (for making a post, by default it will be a draft post)
 {
   "post": {
     "title": "My New Post",
@@ -73,7 +78,7 @@ After a successful payment, the user's subscription will be automatically update
 }
 
 
-=> POST URL: http://127.0.0.1:3000/posts/draft (making a draft post)
+=> POST URL: http://127.0.0.1:3000/posts/draft (making a draft post, another way)
 
 {
   "post": {
