@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       get :recommended_posts
       get :most_commented_posts
       get :posts_by_date
+      get :post_by_title
     end
   end
   resources :lists, except: [:new, :edit] do

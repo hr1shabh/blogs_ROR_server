@@ -1,6 +1,6 @@
 # README
 
-Completed all features of level 1, level2 and level 3. Included every feature of level 5 except Revision history (Reading time is calculated on frontend side by using wordcount and average reading speed).  
+Completed all features of level 1, level 2 and level 3. Included every feature of level 5 except Revision history.  
 
 
 FOR LEVEL 4:
@@ -48,6 +48,8 @@ CODE FOR TESTING USING POSTMAN
 => Delete  -   http://127.0.0.1:3000/users/:user_id/relationships   [For unfollowing user having given user_id]
 
 => Delete  -   http://127.0.0.1:3000/users/sign_out  [for log out]
+
+
 
 
 * Posts 
@@ -115,11 +117,15 @@ Drafts posts will be visible to only original user.
 
 => DELETE URL: http://127.0.0.1:3000/posts/:id (deleting the post (only authorize user can delete it))
 
+
+
 * Bookmarks
 
 => POST URL: http://127.0.0.1:3000/posts/:id/bookmark (user can bookmark a post to read it later)
 
 => GET URL: http://127.0.0.1:3000/posts/bookmarked_posts (user can get all the posts he bookmarked).
+
+
 
 
 * Lists
@@ -154,6 +160,8 @@ Drafts posts will be visible to only original user.
 => GET URL: http://127.0.0.1:3000/lists/:id   (for getting all the information about his/her list)
 
 
+
+
 * Likes
 
 => POST URL: http://127.0.0.1:3000/posts/:post_id/likes (for liking the post by current loggedin user)
@@ -168,6 +176,8 @@ Drafts posts will be visible to only original user.
 
 => GET URL: http://127.0.0.1:3000/posts/:post_id/likes/count (for getting like count)
 
+
+
 * Comments
 
 => POST URL: http://127.0.0.1:3000/posts/:post_id/comments (posting a comment by loggedin user)
@@ -180,6 +190,9 @@ Drafts posts will be visible to only original user.
 => DELETE URL: http://127.0.0.1:3000/posts/:post_id/comments/:comment_id (for deleting the comment by original user)
 
 => GET URL: http://127.0.0.1:3000/posts/:post_id/comments/:comment_id (for getting a comment for a given post).
+
+
+
 
 * Follow operations (Relationships)
 

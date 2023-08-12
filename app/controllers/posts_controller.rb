@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
     before_action :set_post, only: [:show, :update, :destroy]
-    before_action :authenticate_user!, except: [:index, :show]
+    before_action :authenticate_user!, except: [:index, :show, :post_by_title, :top_posts, :recommended_posts, :most_commented_posts, :posts_by_date, :posts_by_topic, :more_posts_by_user]
     before_action :authorize_user!, only: [:update, :destroy]   
+    
     def index
       @posts = Post.where(status: "published").order(created_at: :desc)
       render json: @posts
@@ -45,9 +46,15 @@ class PostsController < ApplicationController
 
     def bookmark
       @post = Post.find(params[:id])
-      current_user.bookmarks.create(post: @post)
-      render json: @post
+    
+      if @post.published?
+        current_user.bookmarks.create(post: @post)
+        render json: @post
+      else
+        render json: { error: "You can only bookmark published posts." }, status: :unprocessable_entity
+      end
     end
+    
   
     def bookmarked_posts
       @user = current_user
@@ -61,30 +68,45 @@ class PostsController < ApplicationController
     end
     def top_posts
       @top_posts = Post
+                    .published
                     .left_joins(:likes)
                     .group(:id)
                     .order('COUNT(likes.id) DESC')
                     .limit(10)
+    
+      render json: @top_posts
     end
+    
     def more_posts_by_user
       author_id = params[:author_id]
-      @author = User.find(author_id)
-      @more_posts = Post.where(user_id: author_id).order(created_at: :desc).limit(10)
+      @more_posts = Post.published
+                       .where(user_id: author_id)
+                       .order(created_at: :desc)
+                       .limit(10)
+      render json: @more_posts
     end
+    
     def posts_by_topic
       topic = params[:topic]
-      @posts_by_topic = Post.where(topic: topic).order(created_at: :desc).limit(10)
+      @posts_by_topic = Post.published
+                           .where(topic: topic)
+                           .order(created_at: :desc)
+                           .limit(10)
+      render json: @posts_by_topic
     end
+    
     def recommended_posts
-      # Retrieve posts ordered by likes count in descending order
-      @recommended_posts = Post
-                          .left_joins(:likes)
-                          .group(:id)
-                          .order('COUNT(likes.id) DESC')
-                          .limit(10)
+      # Retrieve published posts ordered by likes count in descending order
+      @recommended_posts = Post.published
+                              .left_joins(:likes)
+                              .group(:id)
+                              .order('COUNT(likes.id) DESC')
+                              .limit(10)
+      render json: @recommended_posts
     end
+    
     def most_commented_posts
-      @most_commented_posts = Post
+      @most_commented_posts = Post.published
                               .left_joins(:comments)
                               .group(:id)
                               .order('COUNT(comments.id) DESC')
@@ -93,8 +115,20 @@ class PostsController < ApplicationController
     def posts_by_date
       start_date = params[:start_date]
       end_date = params[:end_date]
-      @posts_by_date = Post.where(published_datetime: start_date..end_date).order(created_at: :desc)
+      
+      # Retrieve published posts within the specified date range
+      @posts_by_date = Post.published
+                         .where(published_datetime: start_date..end_date)
+                         .order(created_at: :desc)
+                         
+      render json: @posts_by_date
     end
+    def post_by_title
+      title = params[:title]
+      @posts = Post.where("title LIKE ?", "%#{title}%").where(status: "published").order(created_at: :desc)
+      render json: @posts
+    end
+  
     private
 
     def set_post
