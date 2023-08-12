@@ -1,7 +1,7 @@
 # README
 
-Completed all features of level 1, level 2, level 3, level 4 (Except the algorithm for distribution) and level 5 (Except Revision History).
-
+Completed all features of level 1, level 2, level 3, level 5 and level 4 (Except the algorithm for distribution).
+[Added Revision History too]
 
 ## FOR LEVEL 4:
 
@@ -221,7 +221,7 @@ Drafts posts will be visible to only original user.
 
 ## Revision History
 
-=> GET URL: http://127.0.0.1:3000/revisions/1 (for getting revisions by revision id)
+=> GET URL: http://127.0.0.1:3000/revisions/:id (for getting revisions by revision id)
 
 => GET URL: http://127.0.0.1:3000/posts/:postid/revisions (for getting all history of given post)
 
