@@ -99,11 +99,14 @@ Drafts posts will be visible to only original user.
 
 => GET URL: http://127.0.0.1:3000/posts/posts_by_topic?topic=Technology (for getting posts by topic, here I use Technology)
 
+=> http://127.0.0.1:3000/posts/posts_by_title?title=Post1 (for getting posts by ttitle)
+
 => GET URL: http://127.0.0.1:3000/posts/recommended_posts (for recommended posts, I used most liked ones (because it was showing to use ML for it))
 
 => GET URL: http://127.0.0.1:3000/posts/most_commented_posts (most commented posts)
 
 => GET URL: http://127.0.0.1:3000/posts/posts_by_date?start_date=<start_date>&end_date=<end_date>  (For getting posts published between these dates)
+
 
 =>PUT or PATCH URL: http://127.0.0.1:3000/posts/:id (For editing the post (only authorize user can edit it))
 {
