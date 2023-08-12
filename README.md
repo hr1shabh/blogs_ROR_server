@@ -1,6 +1,6 @@
 # README
 
-Completed all features of level 1, level 2, level 3 and level 4 (Except the algorithm to disctribute) and level 5 (Except Revision History).
+Completed all features of level 1, level 2, level 3, level 4 (Except the algorithm to disctribute) and level 5 (Except Revision History).
 
 
 ## FOR LEVEL 4:
