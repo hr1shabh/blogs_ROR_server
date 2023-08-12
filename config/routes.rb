@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     post :bookmark, on: :member
     delete :delete_bookmark, on: :member
     get :bookmarked_posts, on: :collection
+    get :revisions, on: :member
     collection do
       get :my_posts
       get :top_posts
@@ -41,5 +42,6 @@ Rails.application.routes.draw do
   post '/posts/publish', to: 'posts#create', status: 'published', as: :publish_posts # Route to publish a post
   post '/posts/draft', to: 'posts#create', status: 'draft', as: :draft_posts # Route to create a draft
 
+  resources :revisions, only: [:show]
   root to: "posts#index"
 end

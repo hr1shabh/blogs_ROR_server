@@ -38,6 +38,8 @@ class PostsController < ApplicationController
           @post.update(status: 'published')
         end
         
+        create_revision(@post) # Create a new revision before saving changes
+        
         render json: @post
       else
         render json: @post.errors, status: :unprocessable_entity
@@ -144,8 +146,26 @@ class PostsController < ApplicationController
       @posts = Post.where("title LIKE ?", "%#{title}%").where(status: "published").order(created_at: :desc)
       render json: @posts
     end
+
+    def revisions
+      @post = Post.find(params[:id])
+      @revisions = @post.revisions.order(created_at: :desc)
+      render json: @revisions
+    end
+  
   
     private
+
+    def create_revision(post)
+      Revision.create!(
+        post_id: post.id,
+        title: post.title,
+        topic: post.topic,
+        text: post.text,
+        published_datetime: post.published_datetime
+        # Add other fields you want to track
+      )
+    end
 
     def set_post
       @post = Post.find(params[:id])

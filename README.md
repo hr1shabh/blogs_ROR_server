@@ -219,7 +219,9 @@ Drafts posts will be visible to only original user.
 
 =>DELETE URL: http://127.0.0.1:3000/users/:user_id/relationships (for unfollowing)
 
+## Revision History
 
+=> GET URL: http://127.0.0.1:3000/revisions/1 (for getting revisions by revision id)
 
-
+=> GET URL: http://127.0.0.1:3000/posts/:postid/revisions (for getting all history of given post)
 

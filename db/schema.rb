@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_12_121404) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_12_161543) do
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
@@ -167,6 +167,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_12_121404) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
+  create_table "revisions", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.string "title"
+    t.string "topic"
+    t.text "text"
+    t.datetime "published_datetime"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_revisions_on_post_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -199,4 +210,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_12_121404) do
   add_foreign_key "posts", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "relationships", "users", column: "follower_id"
+  add_foreign_key "revisions", "posts"
 end

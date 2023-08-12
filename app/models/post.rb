@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   has_many :bookmarks
   has_many :list_items
   has_many :lists, through: :list_items
+  has_many :revisions, dependent: :destroy
   def draft?
     status == "draft"
   end
