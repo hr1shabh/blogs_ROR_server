@@ -2,8 +2,21 @@
 
 Completed all features till level 3. Also included every feature from level 5 except Revision history (Reading time can be calculated on frontend side).  
 (Added features: Posts (drafts and published), Lists, Bookmarks)
-For Level 4: Added the payment gateway using stripe. User can pay for subscription by going to 'http://127.0.0.1:3000/checkout'. There will be a button there that will lead to stripe page.
-For testing code using Postman:
+
+FOR LEVEL 4:
+
+Users can choose different subscriptions using Stripe.
+
+To subscribe to the "3 posts per day" plan, users should visit 'http://localhost:3000/checkout/price_1NdxtkSBy3bc8352pewtNL2Q'. 
+ 
+For the "5 posts per day" plan, the URL is 'http://localhost:3000/checkout/price_1Ne9mySBy3bc8352DkV604DG', 
+ 
+and for the "10 posts per day" plan, users should go to 'http://localhost:3000/checkout/price_1NeAQ0SBy3bc8352mYYmwOnH'.
+
+Once on the respective URL, users will see a checkout button (I have used views/checkouts/show.html.erb here, for simplicity. The Proper page can be implemented on frontend side). Upon clicking this button, they will be redirected to the Stripe-hosted checkout page, where they can complete the payment process.
+
+After a successful payment, the user's subscription will be automatically updated to the subscribed plan they chose.
+
 
 * Users
 
