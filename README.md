@@ -28,8 +28,7 @@ CODE FOR TESTING USING POSTMAN
   "user": {
     "email": "test@example.com",
     "password": "password",
-    "password_confirmation": "password",
-    "name": "Test User"
+    "password_confirmation": "password"
   }
 }
 
