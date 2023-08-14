@@ -26,6 +26,7 @@ class PostsController < ApplicationController
       end
   
       if @post.save
+        create_revision(@post)
         render json: @post, status: :created
       else
         render json: @post.errors, status: :unprocessable_entity
