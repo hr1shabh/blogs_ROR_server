@@ -3,14 +3,19 @@ class LikesController < ApplicationController
     before_action :authenticate_user!, except: [:show_users, :count]
   
     def create
-      @like = @post.likes.build(user: current_user)
-  
-      if @like.save
-        render json: @like, status: :created
-      else
-        render json: @like.errors, status: :unprocessable_entity
+      begin
+        @like = @post.likes.build(user: current_user)
+      
+        if @like.save
+          render json: @like, status: :created
+        else
+          render json: { errors: @like.errors.full_messages }, status: :unprocessable_entity
+        end
+      rescue => e
+        render json: { error: e.message }, status: :internal_server_error
       end
     end
+    
   
     def destroy
       @like = @post.likes.find_by(user: current_user)

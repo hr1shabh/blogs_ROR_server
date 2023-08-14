@@ -18,38 +18,52 @@ class PostsController < ApplicationController
     end
   
     def create
-      @post = current_user.posts.build(post_params)
-      if params[:publish]
-        @post.status = "published"
-      else
-        @post.status = "draft"
-      end
-  
-      if @post.save
-        create_revision(@post)
-        render json: @post, status: :created
-      else
-        render json: @post.errors, status: :unprocessable_entity
+      begin
+        @post = current_user.posts.build(post_params)
+        if params[:publish]
+          @post.status = "published"
+        else
+          @post.status = "draft"
+        end
+    
+        if @post.save
+          create_revision(@post)
+          render json: @post, status: :created
+        else
+          render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
+        end
+      rescue => e
+        render json: { error: e.message }, status: :internal_server_error
       end
     end
-  
+    
     def update
-      if @post.update(post_params)
-        if params[:publish] && @post.draft?
-          @post.update(status: 'published')
+      begin
+        if @post.update(post_params)
+          if params[:publish] && @post.draft?
+            @post.update(status: 'published')
+          end
+  
+          create_revision(@post) # Create a new revision before saving changes
+  
+          render json: @post
+        else
+          render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
         end
-        
-        create_revision(@post) # Create a new revision before saving changes
-        
-        render json: @post
-      else
-        render json: @post.errors, status: :unprocessable_entity
+      rescue => e
+        render json: { error: e.message }, status: :internal_server_error
       end
     end
   
     def destroy
-      @post.destroy
+      begin
+        @post.destroy
+        render json: { message: 'Post deleted successfully' }
+      rescue => e
+        render json: { error: e.message }, status: :internal_server_error
+      end
     end
+    
 
     def bookmark
       @post = Post.find(params[:id])
@@ -166,6 +180,10 @@ class PostsController < ApplicationController
         published_datetime: post.published_datetime
         # Add other fields you want to track
       )
+    end
+
+    def handle_error(exception)
+      render json: { error: exception.message }, status: :internal_server_error
     end
 
     def set_post

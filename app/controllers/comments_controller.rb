@@ -10,24 +10,28 @@ class CommentsController < ApplicationController
     end
 
     def create
-      @comment = @post.comments.build(comment_params)
-      @comment.user = current_user
+      begin
+        @comment = @post.comments.build(comment_params)
+        @comment.user = current_user
   
-      if @comment.save
-        render json: @comment, status: :created
-      else
-        render json: @comment.errors, status: :unprocessable_entity
+        if @comment.save
+          render json: @comment, status: :created
+        else
+          render json: { errors: @comment.errors.full_messages }, status: :unprocessable_entity
+        end
+      rescue => e
+        render json: { error: e.message }, status: :internal_server_error
       end
     end
   
     def destroy
-      @comment.destroy
-    end
-
-    def show
-        @comment = @post.comments.find(params[:id])
-        render json: @comment
+      begin
+        @comment.destroy
+        head :no_content
+      rescue => e
+        render json: { error: e.message }, status: :internal_server_error
       end
+    end
   
     private
   
