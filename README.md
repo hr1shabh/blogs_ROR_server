@@ -1,7 +1,7 @@
 # README
 
-Completed all features of level 1, level 2, level 3, level 5 and level 4 (Except the algorithm for distribution).
-[Added Revision History too]
+Completed all features of level 1, level 2, level 3, level 4 and level 5.
+
 
 ## FOR LEVEL 4:
 
